@@ -1,7 +1,13 @@
+import { UserButton } from '@clerk/nextjs'
 import React from 'react'
 
 const DashboardPage = () => {
-	return <div>DashboardPage (Protected) </div>
+	return (
+		<div>
+			<p> DashboardPage (Protected)</p>
+			<UserButton />
+		</div>
+	)
 }
 
 export default DashboardPage
