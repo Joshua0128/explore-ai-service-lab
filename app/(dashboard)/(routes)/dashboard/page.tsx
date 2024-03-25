@@ -5,7 +5,6 @@ const DashboardPage = () => {
 	return (
 		<div>
 			<p> DashboardPage (Protected)</p>
-			<UserButton />
 		</div>
 	)
 }
