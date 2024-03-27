@@ -6,13 +6,11 @@ import { useState } from 'react'
 import axios from 'axios'
 import * as z from 'zod'
 import Heading from '@/components/heading'
-import { MessageSquare } from 'lucide-react'
+import { MusicIcon } from 'lucide-react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { useRouter } from 'next/navigation'
-
-import type { OpenAI } from 'openai'
 
 import { formSchema } from './constants'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
@@ -20,19 +18,11 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Empty from '@/components/empty'
 import Loader from '@/components/loader'
-import { cn } from '@/lib/utils'
-import UserAvatar from '@/components/user-avatar'
-import BotAvatar from '@/components/bot-avatar'
 
-interface ChatMessage {
-	role: OpenAI.Chat.ChatCompletionRole
-	content: string
-}
-
-const ChatPage = () => {
+const MusicPage = () => {
 	const router = useRouter()
 
-	const [messages, setMessages] = useState<ChatMessage[]>([])
+	const [music, setMusic] = useState<string>()
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -45,16 +35,10 @@ const ChatPage = () => {
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
-			const userMessage = {
-				role: 'user',
-				content: values.prompt,
-			}
-			const newMessages = [...messages, userMessage]
-			const response = await axios.post('/api/chat', {
-				messages: newMessages,
-			})
+			setMusic(undefined)
+			const response = await axios.post('/api/music', values)
 
-			setMessages((current) => [...current, userMessage, response.data])
+			setMusic(response.data.audio)
 			form.reset()
 		} catch (error) {
 			console.log(error)
@@ -66,11 +50,11 @@ const ChatPage = () => {
 	return (
 		<div>
 			<Heading
-				title="Chat"
-				description="AI Chat with you"
-				icon={MessageSquare}
-				iconColor="text-violet-500"
-				bgColor="bg-violet-500/10"
+				title="Music Generation"
+				description="Generate music using OpenAI's GPT-3.5-turbo"
+				icon={MusicIcon}
+				iconColor="text-emerald-500"
+				bgColor="bg-emerald-500/10"
 			/>
 			<div className="px-4 lg:px-8">
 				<Form {...form}>
@@ -97,7 +81,7 @@ const ChatPage = () => {
 										<Input
 											className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
 											disabled={isLoading}
-											placeholder="What is the finited answer of the whole universe?"
+											placeholder="jazz solo with Saxophone, Blue giant"
 											{...field}
 										/>
 									</FormControl>
@@ -112,39 +96,20 @@ const ChatPage = () => {
 						</Button>
 					</form>
 				</Form>
-			</div>
-			<div className="space-y-4 mt-4">
 				{isLoading && (
 					<div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
 						<Loader />
 					</div>
 				)}
-				{messages.length === 0 && !isLoading && (
-					<Empty label="No chat started" />
+				{!music && !isLoading && <Empty label="No music generated" />}
+				{music && (
+					<audio controls className="w-full mt-8">
+						<source src={music} type="audio/mpeg" />
+					</audio>
 				)}
-				<div className="flex flex-col-reverse gap-y-4">
-					{messages.map((message) => (
-						<div
-							key={message.content}
-							className={cn(
-								'p-8 w-full flex items-start gap-x-8 rounded-lg',
-								message.role === 'user'
-									? 'bg-white border border-black/10'
-									: 'bg-muted'
-							)}
-						>
-							{message.role === 'user' ? (
-								<UserAvatar />
-							) : (
-								<BotAvatar />
-							)}
-							<p className="text-sm">{message.content}</p>
-						</div>
-					))}
-				</div>
 			</div>
 		</div>
 	)
 }
 
-export default ChatPage
+export default MusicPage

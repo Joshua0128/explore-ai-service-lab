@@ -6,7 +6,9 @@ import { useState } from 'react'
 import axios from 'axios'
 import * as z from 'zod'
 import Heading from '@/components/heading'
-import { MessageSquare } from 'lucide-react'
+import { Code } from 'lucide-react'
+
+import RactMarkdown from 'react-markdown'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -29,7 +31,7 @@ interface ChatMessage {
 	content: string
 }
 
-const ChatPage = () => {
+const CodePage = () => {
 	const router = useRouter()
 
 	const [messages, setMessages] = useState<ChatMessage[]>([])
@@ -50,7 +52,7 @@ const ChatPage = () => {
 				content: values.prompt,
 			}
 			const newMessages = [...messages, userMessage]
-			const response = await axios.post('/api/chat', {
+			const response = await axios.post('/api/code', {
 				messages: newMessages,
 			})
 
@@ -66,11 +68,11 @@ const ChatPage = () => {
 	return (
 		<div>
 			<Heading
-				title="Chat"
-				description="AI Chat with you"
-				icon={MessageSquare}
-				iconColor="text-violet-500"
-				bgColor="bg-violet-500/10"
+				title="Code Generation"
+				description="Generate code for you"
+				icon={Code}
+				iconColor="text-green-700"
+				bgColor="bg-green-700/10"
 			/>
 			<div className="px-4 lg:px-8">
 				<Form {...form}>
@@ -97,7 +99,7 @@ const ChatPage = () => {
 										<Input
 											className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
 											disabled={isLoading}
-											placeholder="What is the finited answer of the whole universe?"
+											placeholder="How to train a small LLM?"
 											{...field}
 										/>
 									</FormControl>
@@ -138,7 +140,24 @@ const ChatPage = () => {
 							) : (
 								<BotAvatar />
 							)}
-							<p className="text-sm">{message.content}</p>
+							<RactMarkdown
+								components={{
+									pre: ({ node, ...props }) => (
+										<div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+											<pre {...props} />
+										</div>
+									),
+									code: ({ node, ...props }) => (
+										<code
+											className="bg-black/10 rounded-lg p-1"
+											{...props}
+										/>
+									),
+								}}
+								className="text-sm overflow-hidden leading-7"
+							>
+								{message.content || ''}
+							</RactMarkdown>
 						</div>
 					))}
 				</div>
@@ -147,4 +166,4 @@ const ChatPage = () => {
 	)
 }
 
-export default ChatPage
+export default CodePage

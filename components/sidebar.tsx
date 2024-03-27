@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Montserrat } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import {
+	Code,
 	ImageIcon,
 	LayoutDashboard,
 	MessageSquare,
@@ -42,10 +43,16 @@ const routes = [
 		color: 'text-emerald-500',
 	},
 	{
+		label: 'Code-Gen',
+		icon: Code,
+		href: '/code',
+		color: 'text-green-500',
+	},
+	{
 		label: 'Video-Gen',
 		icon: VideoIcon,
 		href: '/video',
-		color: 'text-green-500',
+		color: 'text-blue-500',
 	},
 	{
 		label: 'Settings',

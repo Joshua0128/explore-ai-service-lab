@@ -5,6 +5,17 @@ import OpenAI from 'openai';
 const openai = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
 });
+
+interface ChatMessage {
+	role: OpenAI.Chat.ChatCompletionRole
+	content: string
+}
+
+const instructionMessage: ChatMessage = {
+  role: "assistant",
+  content: "You are a code assistant. You must answer in markdown code snippets. Use code comments for explanations"
+}
+
 export async function POST(
   req: Request
 ) {
@@ -26,8 +37,8 @@ export async function POST(
     }
 
     const response = await openai.chat.completions.create({
-      messages,
       model: 'gpt-3.5-turbo',
+      messages: [instructionMessage, ...messages],
     });
 
     return new NextResponse(JSON.stringify(response.choices[0].message), {
@@ -37,7 +48,7 @@ export async function POST(
       },
     });
   } catch (error) {
-    console.log("[CHAT_ERROR]", error)
+    console.log("[CODE_ERROR]", error)
     return new NextResponse("Interal Server Error", {
       status: 500,
     });
