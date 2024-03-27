@@ -2,6 +2,13 @@
 
 Explore AI Service Lab showcases diverse AI APIs from various providers, offering an experimental hub for integration and comparison. Ideal for developers and tech enthusiasts, it's a concise guide to leveraging AI technology in real-world applications.
 
+### Support APIs
+| Model    | Service | Description            | Support    |
+|----------|---------|------------------------|------------|
+| ChatGPT  | OpenAI | chat | ✔️ |
+| ChatGPT  | OpenAI | image generation | ✔️ |
+
+
 
 ## Getting Started
 
@@ -22,3 +29,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 [text](http://localhost:3000/dashboard)
+
+## Reference
+- [Build a SaaS AI Platform with Next.js 13, React, Tailwind, Prisma, Stripe | Full Tutorial 2023](https://www.youtube.com/watch?v=ffJ38dBzrlY&ab_channel=CodeWithAntonio)
