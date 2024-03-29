@@ -1,35 +1,34 @@
-import { auth } from "@clerk/nextjs";
-
-import prismadb from "@/lib/prismadb";
-import { MAX_FREE_COUNTS } from "@/constant";
+import { MAX_FREE_COUNTS } from '@/constant'
+import prismadb from '@/lib/prismadb'
+import { auth } from '@clerk/nextjs'
 
 export const increaseApiLimit = async () => {
   const { userId } = auth()
-  if(!userId) {
+  if (!userId) {
     return
   }
 
   const userApiLimit = await prismadb.userApiLimit.findUnique({
     where: {
-      userId
-    }
+      userId,
+    },
   })
 
-  if(userApiLimit) {
+  if (userApiLimit) {
     await prismadb.userApiLimit.update({
       where: {
-        userId
+        userId,
       },
       data: {
-        count: userApiLimit.count + 1
-      }
+        count: userApiLimit.count + 1,
+      },
     })
   } else {
     await prismadb.userApiLimit.create({
       data: {
         userId,
-        count: 1
-      }
+        count: 1,
+      },
     })
   }
 }
@@ -37,21 +36,19 @@ export const increaseApiLimit = async () => {
 export const checkApiLimit = async () => {
   const { userId } = auth()
 
-  if(!userId) {
+  if (!userId) {
     return false
   }
 
   const userApiLimit = await prismadb.userApiLimit.findUnique({
     where: {
-      userId
-    }
+      userId,
+    },
   })
 
-  if(!userApiLimit || userApiLimit.count < MAX_FREE_COUNTS) {
+  if (!userApiLimit || userApiLimit.count < MAX_FREE_COUNTS) {
     return true
   } else {
     return false
   }
 }
-
-
