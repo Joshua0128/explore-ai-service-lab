@@ -1,26 +1,27 @@
+import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
+import React from 'react'
+
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-	title: 'AI Experiment Lab: Discover & Innovate',
-	description:
-		'A hub for experimenting with diverse AI APIs for developers and tech enthusiasts.',
+  title: 'AI Experiment Lab: Discover & Innovate',
+  description: 'A hub for experimenting with diverse AI APIs for developers and tech enthusiasts.',
 }
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode
+  children: React.ReactNode
 }>) {
-	return (
-		<ClerkProvider>
-			<html lang="en">
-				<body className={inter.className}>{children}</body>
-			</html>
-		</ClerkProvider>
-	)
+  return (
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>{children}</body>
+      </html>
+    </ClerkProvider>
+  )
 }

@@ -16,6 +16,7 @@ const instructionMessage: ChatMessage = {
   content: "You are a code assistant. You must answer in markdown code snippets. Use code comments for explanations"
 }
 
+
 export async function POST(
   req: Request
 ) {

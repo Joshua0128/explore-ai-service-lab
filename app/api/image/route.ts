@@ -6,16 +6,6 @@ const openai = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
 });
 
-interface ChatMessage {
-	role: OpenAI.Chat.ChatCompletionRole
-	content: string
-}
-
-const instructionMessage: ChatMessage = {
-  role: "assistant",
-  content: "You are a code assistant. You must answer in markdown code snippets. Use code comments for explanations"
-}
-
 export async function POST(
   req: Request
 ) {
