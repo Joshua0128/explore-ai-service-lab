@@ -7,7 +7,11 @@ import { Menu } from 'lucide-react'
 import React from 'react'
 import { useEffect, useState } from 'react'
 
-const MobileSideBar = () => {
+interface MobileSideBarProps {
+  apiLimitCount: number
+}
+
+const MobileSideBar = ({ apiLimitCount = 0 }: MobileSideBarProps) => {
   // hydration error
   // https://stackoverflow.com/questions/73162551/how-to-solve-react-hydration-error-in-nextjs
   const [isMounted, setIsMounted] = useState(false)
@@ -28,7 +32,7 @@ const MobileSideBar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <Sidebar />
+        <Sidebar apiLimitCount={apiLimitCount} />
       </SheetContent>
     </Sheet>
   )

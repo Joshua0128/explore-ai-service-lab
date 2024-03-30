@@ -1,6 +1,8 @@
 # AI API Explore Lab
 
-Explore AI Service Lab showcases diverse AI APIs from various providers, offering an experimental hub for integration and comparison. Ideal for developers and tech enthusiasts, it's a concise guide to leveraging AI technology in real-world applications.
+Explore AI Service Lab showcases diverse AI APIs from various providers, offering an experimental
+hub for integration and comparison. Ideal for developers and tech enthusiasts, it's a concise guide
+to leveraging AI technology in real-world applications.
 
 ### Support APIs
 
@@ -25,10 +27,12 @@ bun dev
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use the
+[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
+from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-[text](http://localhost:3000/dashboard)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
+details. [text](http://localhost:3000/dashboard)
 
 ## Reference
 
