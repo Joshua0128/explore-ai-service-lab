@@ -12,6 +12,7 @@ import { VideoIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 import { formSchema } from './constants'
@@ -38,6 +39,7 @@ const VideoPage = () => {
       setVideo(response.data[0])
       form.reset()
     } catch (error) {
+      toast.error('Something went wrong')
       console.log(error)
     } finally {
       router.refresh()

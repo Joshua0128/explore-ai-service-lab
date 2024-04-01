@@ -16,7 +16,8 @@ import { useRouter } from 'next/navigation'
 import type { OpenAI } from 'openai'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import RactMarkdown from 'react-markdown'
+import toast from 'react-hot-toast'
+import ReactMarkdown from 'react-markdown'
 import * as z from 'zod'
 
 import { formSchema } from './constants'
@@ -55,6 +56,7 @@ const CodePage = () => {
       form.reset()
     } catch (error) {
       console.log(error)
+      toast.error('Something went wrong')
     } finally {
       router.refresh()
     }
@@ -124,7 +126,7 @@ const CodePage = () => {
               )}
             >
               {message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
-              <RactMarkdown
+              <ReactMarkdown
                 components={{
                   pre: ({ ...props }) => (
                     <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
@@ -138,7 +140,7 @@ const CodePage = () => {
                 className="text-sm overflow-hidden leading-7"
               >
                 {message.content || ''}
-              </RactMarkdown>
+              </ReactMarkdown>
             </div>
           ))}
         </div>

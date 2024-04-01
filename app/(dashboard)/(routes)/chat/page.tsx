@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import type { OpenAI } from 'openai'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as z from 'zod'
 
 import { formSchema } from './constants'
@@ -55,6 +56,7 @@ const ChatPage = () => {
     } catch (error) {
       // TODO: add a middleware to catch 403 error and open the promodal.
       console.log(error)
+      toast.error('Something went wrong')
     } finally {
       // rehydrate all server component.
       router.refresh()

@@ -24,6 +24,7 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
 import { amountOptions, formSchema, resolutionOptions } from './constants'
+import toast from 'react-hot-toast'
 
 const ImagePage = () => {
   const router = useRouter()
@@ -49,6 +50,7 @@ const ImagePage = () => {
       setImages(urls)
       form.reset()
     } catch (error) {
+      toast.error('Something went wrong')
       console.log(error)
     } finally {
       router.refresh()

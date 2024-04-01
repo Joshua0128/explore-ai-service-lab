@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
 import { formSchema } from './constants'
+import toast from 'react-hot-toast'
 
 const MusicPage = () => {
   const router = useRouter()
@@ -38,6 +39,8 @@ const MusicPage = () => {
       setMusic(response.data.audio)
       form.reset()
     } catch (error) {
+      toast.error('Something went wrong')
+
       console.log(error)
     } finally {
       router.refresh()
