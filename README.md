@@ -10,6 +10,9 @@ to leveraging AI technology in real-world applications.
 | ------- | ------- | ---------------- | ------- |
 | ChatGPT | OpenAI  | chat             | ✔️      |
 | ChatGPT | OpenAI  | image generation | ✔️      |
+| command-r | Cohere  | Chat |       |
+
+
 
 ## Getting Started
 
